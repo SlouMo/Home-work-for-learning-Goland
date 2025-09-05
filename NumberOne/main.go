@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"math"
 	"strings"
+	"time"
 	"unicode"
 )
 
@@ -40,6 +41,10 @@ func main() {
 	fmt.Println(IsPalindrome("шалаш"))
 	fmt.Println(IsPalindrome("А роза упала на лапу Азора"))
 	fmt.Println(IsPalindrome("hello"))
+	fmt.Println()
+	fmt.Println(IsPalindrome2("шалаш"))
+	fmt.Println(IsPalindrome2("А роза упала на лапу Азора"))
+	fmt.Println(IsPalindrome2("hello"))
 	fmt.Println("---------------------------")
 
 	fmt.Println("Задание номер 7")
@@ -51,11 +56,7 @@ func WordCount(s string) map[string]int {
 	result := make(map[string]int)
 
 	for _, str := range arrayStr {
-		if value, ok := result[str]; ok {
-			result[str] = value + 1
-		} else {
-			result[str] = 1
-		}
+		result[str]++
 	}
 
 	return result
@@ -118,12 +119,12 @@ func FirstUnique(s string) rune {
 
 func RemoveDuplicates(nums []int) []int {
 	var resultSlice []int
-	tempMap := make(map[int]int)
+	tempMap := make(map[int]bool)
 
 	for _, num := range nums {
 		if _, isExists := tempMap[num]; !isExists {
 			resultSlice = append(resultSlice, num)
-			tempMap[num] = num
+			tempMap[num] = false
 		}
 	}
 
@@ -143,6 +144,7 @@ func RemoveElement(nums []int, index int) ([]int, error) {
 }
 
 func IsPalindrome(s string) bool {
+	start := time.Now()
 	var strBuilder strings.Builder
 
 	for _, char := range s {
@@ -157,10 +159,47 @@ func IsPalindrome(s string) bool {
 
 	for i := 0; i < (lenStr-1)/2; i++ {
 		if strRune[i] != strRune[lenStr-1-i] {
+			duration := time.Since(start)
+			fmt.Printf("Время: %v\n", duration)
 			return false
+
 		}
 	}
 
+	duration := time.Since(start)
+	fmt.Printf("Время: %v\n", duration)
+	return true
+
+}
+
+func IsPalindrome2(s string) bool {
+	start := time.Now()
+	runes := []rune(s)
+
+	for i, j := 0, len(runes)-1; i < j; {
+
+		if !unicode.IsLetter(runes[i]) {
+			i++
+			continue
+		}
+
+		if !unicode.IsLetter(runes[j]) {
+			j--
+			continue
+		}
+
+		if unicode.ToLower(runes[i]) != unicode.ToLower(runes[j]) {
+			duration := time.Since(start)
+			fmt.Printf("Время: %v\n", duration)
+			return false
+		}
+
+		i++
+		j--
+	}
+
+	duration := time.Since(start)
+	fmt.Printf("Время: %v\n", duration)
 	return true
 }
 
@@ -183,11 +222,7 @@ func stringToMap(s string) map[rune]int {
 	result := make(map[rune]int)
 
 	for _, char := range s {
-		if value, ok := result[char]; ok {
-			result[char] = value + 1
-		} else {
-			result[char] = 1
-		}
+		result[char]++
 	}
 
 	return result
