@@ -1,0 +1,156 @@
+package main
+
+import (
+	"fmt"
+	"time"
+)
+
+func main() {
+	items := []string{"one", "two", "three", "four", "five"}
+	stack := NewStack(items)
+	fmt.Println("Стек в текущем состоянии")
+	PrintStack(stack)
+
+	fmt.Println("Добавление в стек")
+	stack.Push("six")
+	PrintStack(stack)
+
+	fmt.Println("Удаление из стека")
+	PrintStack(stack)
+	stack.Pop()
+	PrintStack(stack)
+	stack.Pop()
+	PrintStack(stack)
+	fmt.Println("Стек на слайсе закончился \n")
+
+	start := time.Now()
+	fmt.Println("Добавление в хвост")
+	fmt.Println("Создание стека из существующего связного списка")
+
+	linkedList := NewLinkedList()
+	linkedList.AddToEnd(5)
+	linkedList.AddToEnd(6)
+	linkedList.AddToHead(4)
+	linkedList.AddToHead(3)
+	fmt.Println(linkedList.Size())
+	stackOnLinkedList := NewStackOnLinkedWithTailList(linkedList)
+	PrintStackOnLinkedWithTailList(stackOnLinkedList)
+
+	fmt.Println("Peek в стек из существующего связного списка")
+	val, isExists := stackOnLinkedList.Peek()
+	fmt.Printf("Значение: %v, isExists: %v\n", val, isExists)
+	PrintStackOnLinkedWithTailList(stackOnLinkedList)
+	fmt.Println("Pop в стек из существующего связного списка")
+	val, isExists = stackOnLinkedList.Pop()
+	fmt.Printf("Значение: %v, isExists: %v\n", val, isExists)
+	PrintStackOnLinkedWithTailList(stackOnLinkedList)
+
+	fmt.Println("Push в стек из существующего связного списка")
+	stackOnLinkedList.Push(353)
+	PrintStackOnLinkedWithTailList(stackOnLinkedList)
+
+	fmt.Println("Создание стека из пустого связного списка")
+	stackOnLinkedList = NewEmptyStackOnLinkedWithTailList()
+	PrintStackOnLinkedWithTailList(stackOnLinkedList)
+	fmt.Println("Pop в стек из пустого связного списка")
+	val, isExists = stackOnLinkedList.Pop()
+	fmt.Printf("Значение: %v, isExists: %v\n", val, isExists)
+	PrintStackOnLinkedWithTailList(stackOnLinkedList)
+	fmt.Println("Peek в стек из пустого связного списка")
+	val, isExists = stackOnLinkedList.Peek()
+	fmt.Printf("Значение: %v, isExists: %v\n", val, isExists)
+	PrintStackOnLinkedWithTailList(stackOnLinkedList)
+	fmt.Println("Push в стек из пустого связного списка")
+	stackOnLinkedList.Push(353)
+	PrintStackOnLinkedWithTailList(stackOnLinkedList)
+	fmt.Println("Peek в стек из только что добавленного элемента")
+	val, isExists = stackOnLinkedList.Peek()
+	fmt.Printf("Значение: %v, isExists: %v\n", val, isExists)
+	PrintStackOnLinkedWithTailList(stackOnLinkedList)
+	fmt.Println("Pop в стек из только что добавленного элемента")
+	val, isExists = stackOnLinkedList.Pop()
+	fmt.Printf("Значение: %v, isExists: %v\n", val, isExists)
+	val, isExists = stackOnLinkedList.Pop()
+	fmt.Printf("Значение: %v, isExists: %v\n", val, isExists)
+	PrintStackOnLinkedWithTailList(stackOnLinkedList)
+	duration := time.Since(start)
+	fmt.Printf("Время: %v\n", duration)
+
+	fmt.Println()
+	start2 := time.Now()
+	fmt.Println("Добавление в голову")
+	fmt.Println("Создание стека из существующего связного списка")
+
+	linkedList2 := NewLinkedList()
+	linkedList2.AddToHead(6)
+	linkedList2.AddToHead(5)
+	linkedList2.AddToHead(4)
+	linkedList2.AddToHead(3)
+	fmt.Println(linkedList2.Size())
+	stackOnLinkedList2 := NewStackOnLinkedList(linkedList2)
+	PrintStackOnLinkedList(stackOnLinkedList2)
+
+	fmt.Println("Peek в стек из существующего связного списка")
+	val2, isExists2 := stackOnLinkedList2.Peek()
+	fmt.Printf("Значение: %v, isExists2: %v\n", val2, isExists2)
+	PrintStackOnLinkedList(stackOnLinkedList2)
+	fmt.Println("Pop в стек из существующего связного списка")
+	val2, isExists2 = stackOnLinkedList2.Pop()
+	fmt.Printf("Значение: %v, isExists2: %v\n", val2, isExists2)
+	PrintStackOnLinkedList(stackOnLinkedList2)
+
+	fmt.Println("Push в стек из существующего связного списка")
+	stackOnLinkedList2.Push(353)
+	PrintStackOnLinkedList(stackOnLinkedList2)
+
+	fmt.Println("Создание стека из пустого связного списка")
+	stackOnLinkedList2 = NewEmptyStackOnLinkedList()
+	PrintStackOnLinkedList(stackOnLinkedList2)
+	fmt.Println("Pop в стек из пустого связного списка")
+	val2, isExists2 = stackOnLinkedList2.Pop()
+	fmt.Printf("Значение: %v, isExists2: %v\n", val2, isExists2)
+	PrintStackOnLinkedList(stackOnLinkedList2)
+	fmt.Println("Peek в стек из пустого связного списка")
+	val2, isExists2 = stackOnLinkedList2.Peek()
+	fmt.Printf("Значение: %v, isExists2: %v\n", val2, isExists2)
+	PrintStackOnLinkedList(stackOnLinkedList2)
+	fmt.Println("Push в стек из пустого связного списка")
+	stackOnLinkedList2.Push(353)
+	PrintStackOnLinkedList(stackOnLinkedList2)
+	fmt.Println("Peek в стек из только что добавленного элемента")
+	val2, isExists2 = stackOnLinkedList2.Peek()
+	fmt.Printf("Значение: %v, isExists2: %v\n", val2, isExists2)
+	PrintStackOnLinkedList(stackOnLinkedList2)
+	fmt.Println("Pop в стек из только что добавленного элемента")
+	val2, isExists2 = stackOnLinkedList2.Pop()
+	fmt.Printf("Значение: %v, isExists2: %v\n", val2, isExists2)
+	val2, isExists2 = stackOnLinkedList2.Pop()
+	fmt.Printf("Значение: %v, isExists2: %v\n", val2, isExists2)
+	PrintStackOnLinkedList(stackOnLinkedList2)
+	duration2 := time.Since(start2)
+	fmt.Printf("Время: %v\n", duration2)
+	//Разница по времени на таком небольшом кол-ве действий на порядок в пользу добавления в голову 150 микро сек против 1,1 мили сек
+	fmt.Println()
+
+	str := "()"
+	res, err := BracketSequenceValidator(str)
+	fmt.Printf("%v: %v, err: %v\n", str, res, err)
+	str = "()[]{}"
+	res, err = BracketSequenceValidator(str)
+	fmt.Printf("%v: %v, err: %v\n", str, res, err)
+	str = "(]"
+	res, err = BracketSequenceValidator(str)
+	fmt.Printf("%v: %v, err: %v\n", str, res, err)
+	str = "([)]"
+	res, err = BracketSequenceValidator(str)
+	fmt.Printf("%v: %v, err: %v\n", str, res, err)
+	str = "{[]}"
+	res, err = BracketSequenceValidator(str)
+	fmt.Printf("%v: %v, err: %v\n", str, res, err)
+	str = "["
+	res, err = BracketSequenceValidator(str)
+	fmt.Printf("%v: %v, err: %v\n", str, res, err)
+	str = "[]!"
+	res, err = BracketSequenceValidator(str)
+	fmt.Printf("%v: %v, err: %v\n", str, res, err)
+}
